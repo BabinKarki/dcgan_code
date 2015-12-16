@@ -145,7 +145,7 @@ class Adam(Update):
 
     def __call__(self, params, cost):
         updates = []
-        grads = T.grad(cost, params)
+        grads = T.grad(cost, params, disconnected_inputs='ignore')
         grads = clip_norms(grads, self.clipnorm)  
         t = theano.shared(floatX(1.))
         b1_t = self.b1*self.l**(t-1)
